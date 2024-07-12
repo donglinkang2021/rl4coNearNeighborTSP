@@ -13,10 +13,11 @@ env_args = {
     'n_UAVs': n_UAVs,
     'n_UGVs': n_UGVs,
     'n_vehicles': n_vehicles,
-    'S': 0,
-    'D': list(range(1, n_depots+1)),
-    'C': list(range(1+n_depots, n)),
+    'S': 0,                             # start point
+    'D': list(range(1, n_depots+1)),    # bus stops
+    'C': list(range(1+n_depots, n)),    # POIs
     'UGVs': [f'v{k}' for k in range(n_UGVs)],
     'UAVs': [f'v{k}' for k in range(n_UGVs, n_vehicles)],
     'K': [f'v{k}' for k in range(n_vehicles)],
 }
+print(env_args)
