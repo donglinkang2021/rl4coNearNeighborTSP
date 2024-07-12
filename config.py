@@ -1,3 +1,24 @@
+settings = {
+    "setting1": {
+        "n_poi": 200,
+        "n_depots": 40,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
+    },
+    "setting2": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 5,
+    },
+    "setting3": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 5,
+    }
+}
+
 n_poi = 3           # user
 n_depots = 4        # bus stop
 n_UGVs = 1
@@ -17,3 +38,11 @@ env_args = {'n_poi': n_poi, 'n_depots': n_depots, 'n': n, 'n_UAVs': n_UAVs, 'n_U
 print(env_args)
 
 filename = f'images/2EVRP-NearNeighbor-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.png'
+
+# some rename for easy understanding
+start_point_index = S
+bus_stops_indices = D
+poi_indices = C
+ugv_names = UGVs
+uav_names = UAVs
+vehicle_names = K
