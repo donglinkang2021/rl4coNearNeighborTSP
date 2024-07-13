@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+from typing import List
 
 def plot_vehicle_routes(
         loc: np.ndarray, 
         routes: dict, 
-        n_depots: int, 
+        uav_start_idxs: List[int], 
         filename: str
     ):
 
@@ -35,14 +36,22 @@ def plot_vehicle_routes(
     # Start point
     plt.plot(loc[0][0], loc[0][1], 'rp', markersize=10, label='Start Point')
     
+    # this will plot all the bus stops
     # Bus stops
-    for depot in range(1, n_depots):
+    # for depot in range(1, n_depots+1):
+    #     plt.plot(
+    #         loc[depot][0], loc[depot][1], 'ks', 
+    #         markersize=10, label=f'Depot {depot}'
+    #     )
+    
+    for i, depot_idx in enumerate(uav_start_idxs):
         plt.plot(
-            loc[depot][0], loc[depot][1], 'ks', 
-            markersize=10, label=f'Depot {depot}'
+            loc[depot_idx][0], loc[depot_idx][1], 'ks', 
+            markersize=10, label=f'Depot {i}'
         )
 
-    plt.legend()
+    plt.legend() # hope this place to the outside of the plot
+    # plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
     plt.title("Vehicle Routes")
     plt.xlabel("X coordinate")
     plt.ylabel("Y coordinate")

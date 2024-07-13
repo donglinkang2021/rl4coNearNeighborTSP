@@ -9,7 +9,8 @@ from method import (
     solve
 )
 
-method = TSPMethod.SIMULATED_ANNEALING
+method = TSPMethod.GENETIC_ALGORITHM
+filename = f'images/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.png'
 
 # generate random data
 np.random.seed(1234)
@@ -39,7 +40,7 @@ uav_poi = {}
 for i in range(n_UAVs):
     uav_poi[uav_names[i]] = {
         'start_idxs': uav_start_idxs[i],
-        'poi_idxs': list(poi_idxs[code_poi == i])
+        'poi_idxs': poi_idxs[code_poi == i].tolist()
     }
 
 # get UAV routes
@@ -52,9 +53,7 @@ for i in range(n_UAVs):
     print(locs.shape)
     dist_matrix = euclidean_distance(locs, locs)
     route = solve(dist_matrix, method)
-    uav_poi[uav_names[i]]['route'] = list(locs_idxs[route])
-
-print(uav_poi)
+    uav_poi[uav_names[i]]['route'] = locs_idxs[route].tolist()
 
 # get UGV routes
 # we have uav_start_idxs as bus stops
@@ -66,7 +65,7 @@ ugv_depot = {}
 for i in range(n_UGVs):
     ugv_depot[ugv_names[i]] = {
         'start_idxs': S,
-        'depot_idxs': list(uav_start_idxs[code_uav == i])
+        'depot_idxs': uav_start_idxs[code_uav == i].tolist()
     }
 
 # get UGV routes
@@ -80,75 +79,20 @@ for i in range(n_UGVs):
     
     dist_matrix = euclidean_distance(locs, locs)
     route = solve(dist_matrix, method)
-    ugv_depot[ugv_names[i]]['route'] = list(locs_idxs[route])
+    ugv_depot[ugv_names[i]]['route'] = locs_idxs[route].tolist()
 
-print(ugv_depot)
+vehicle_routes = {}
+for vehicle, info in ugv_depot.items():
+    vehicle_routes[vehicle] = info['route']
+for vehicle, info in uav_poi.items():
+    vehicle_routes[vehicle] = info['route']
 
+print(vehicle_routes)
 
-
-
-
-# plot
-import matplotlib
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 10))
-colors = matplotlib.colormaps['tab20']
-plt.plot(loc[0][0], loc[0][1], 'rp', markersize=10, label='Start Point')
-for i in range(n_UAVs):
-    vehicle_name = uav_names[i]
-    start_idxs = uav_poi[vehicle_name]['start_idxs']
-    start_locs = loc[start_idxs]
-    route = uav_poi[uav_names[i]]['route']
-    route_locs = loc[route]
-    # Bus stops
-    plt.plot(
-        start_locs[0],
-        start_locs[1],
-        'ks', 
-        markersize=10, 
-        label=f'Depot {uav_names[i]}'
-    )
-    plt.plot(
-        route_locs[:, 0], route_locs[:, 1], 
-        marker='o', color=colors(i), 
-        label=f'{vehicle_name}'
-    )
-    for j in range(len(route_locs) - 1):
-        plt.arrow(
-            route_locs[j, 0], route_locs[j, 1],
-            route_locs[j+1, 0] - route_locs[j, 0], 
-            route_locs[j+1, 1] - route_locs[j, 1],
-            head_width=0.02, 
-            length_includes_head=True, 
-            color=colors(i)
-        )
-for i in range(n_UGVs):
-    vehicle_name = ugv_names[i]
-    start_idxs = ugv_depot[vehicle_name]['start_idxs']
-    start_locs = loc[start_idxs]
-    route = ugv_depot[vehicle_name]['route']
-    route_locs = loc[route]
-    
-    plt.plot(
-        route_locs[:, 0], route_locs[:, 1], 
-        marker='o', color=colors(i), 
-        label=f'{vehicle_name}'
-    )
-    for j in range(len(route_locs) - 1):
-        plt.arrow(
-            route_locs[j, 0], route_locs[j, 1],
-            route_locs[j+1, 0] - route_locs[j, 0], 
-            route_locs[j+1, 1] - route_locs[j, 1],
-            head_width=0.02, 
-            length_includes_head=True, 
-            color=colors(i)
-        )
-
-plt.title("Vehicle Routes")
-
-plt.grid()
-plt.legend()
-filename = f'images/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.png'
-plt.savefig(filename)
-print(f'Image saved to {filename}')
+uav_start_idxs = uav_start_idxs.tolist()
+from plot import plot_vehicle_routes
+plot_vehicle_routes(loc, vehicle_routes, uav_start_idxs, filename)
+from utils import calc_avg_node_visit_time_multi_car
+avg_visit_time = calc_avg_node_visit_time_multi_car(loc, vehicle_routes)
+print(f"Average node visit time: {avg_visit_time}")
 
