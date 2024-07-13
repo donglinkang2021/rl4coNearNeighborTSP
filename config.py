@@ -28,7 +28,94 @@ settings = {
         "n_depots": 20,
         "n_UGVs": 1,
         "n_UAVs": 10,
-    }
+    },
+    "setting6": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 3,
+    },
+    "setting7": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 5,
+    },
+    "setting8": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 5,
+    },
+
+    "setting9": {
+        "n_poi": 200,
+        "n_depots": 10,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+    "setting10": {
+        "n_poi": 200,
+        "n_depots": 30,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+    "setting11": {
+        "n_poi": 200,
+        "n_depots": 40,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+
+    "setting12": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 3,
+    },
+    "setting13": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 5,
+    },
+    "setting14": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 5,
+    },
+    "setting15": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 10,
+    },
+
+    "setting16": {
+        "n_poi": 100,
+        "n_depots": 10,
+        "n_UGVs": 1,
+        "n_UAVs": 5,
+    },
+    "setting17": {
+        "n_poi": 100,
+        "n_depots": 30,
+        "n_UGVs": 1,
+        "n_UAVs": 5,
+    },
+    "setting18": {
+        "n_poi": 100,
+        "n_depots": 40,
+        "n_UGVs": 1,
+        "n_UAVs": 5,
+    },
+    "setting19": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 10,
+    },
 }
 
 def get_setting(name:str):
@@ -38,8 +125,6 @@ def get_setting(name:str):
 # n_depots = 20        # bus stop
 # n_UGVs = 1
 # n_UAVs = 5
-
-n_poi, n_depots, n_UGVs, n_UAVs = get_setting('setting1')
 
 def get_env_args(n_poi:int, n_depots:int, n_UGVs:int, n_UAVs:int):
     n = n_poi + n_depots + 1                            # number of nodes

@@ -53,8 +53,8 @@ def plot_vehicle_routes(
     #         markersize=10, label=f'Depot {i}'
     #     )
 
-    plt.legend() # hope this place to the outside of the plot
-    # plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
+    # plt.legend() # hope this place to the outside of the plot
+    plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
     avg_visit_time = calc_avg_node_visit_time_multi_car(loc, routes, env_args)
     plt.title(f"Vehicle Routes\nAverage node visit time: {avg_visit_time:.2f}")
     plt.xlabel("X coordinate")

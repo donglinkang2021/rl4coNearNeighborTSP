@@ -1,7 +1,7 @@
 # import debugpy; debugpy.connect(('10.1.114.56', 5678))
 
 import numpy as np
-from config import get_env_args, get_setting
+from config import get_env_args, get_setting, settings
 from utils import calc_avg_node_visit_time_multi_car
 from method import (
     kmeans, 
@@ -112,7 +112,7 @@ def main():
 
     # solution
     method = TSPMethod.NEAREST_NEIGHBOR
-    settings_list = ['setting1', 'setting2', 'setting3', 'setting4', 'setting5']
+    settings_list = settings.keys()
 
     pbar = tqdm(
         total=len(settings_list)*dataset_size,
