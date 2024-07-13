@@ -1,4 +1,4 @@
-import debugpy; debugpy.connect(('10.1.114.56', 5678))
+# import debugpy; debugpy.connect(('10.1.114.56', 5678))
 
 import matplotlib
 import matplotlib.pyplot as plt
