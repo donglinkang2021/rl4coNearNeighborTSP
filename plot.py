@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+from utils import calc_avg_node_visit_time_multi_car
 from typing import List
 
 def plot_vehicle_routes(
@@ -52,7 +53,8 @@ def plot_vehicle_routes(
 
     plt.legend() # hope this place to the outside of the plot
     # plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
-    plt.title("Vehicle Routes")
+    avg_visit_time = calc_avg_node_visit_time_multi_car(loc, routes)
+    plt.title(f"Vehicle Routes\nAverage node visit time: {avg_visit_time:.2f}")
     plt.xlabel("X coordinate")
     plt.ylabel("Y coordinate")
     plt.grid()

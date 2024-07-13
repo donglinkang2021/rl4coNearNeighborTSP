@@ -86,6 +86,9 @@ def mutate(
         mutation_rate: float
     ) -> List[int]:
     """swap two cities with a probability"""
+    if len(tour) <= 2:
+        return tour
+
     for i in range(len(tour) - 1):
         if np.random.rand() < mutation_rate:
             j = np.random.randint(0, len(tour) - 2)

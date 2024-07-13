@@ -9,7 +9,7 @@ from method import (
     solve
 )
 
-method = TSPMethod.GENETIC_ALGORITHM
+method = TSPMethod.SIMULATED_ANNEALING
 filename = f'images/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.png'
 
 # generate random data
@@ -92,7 +92,4 @@ print(vehicle_routes)
 uav_start_idxs = uav_start_idxs.tolist()
 from plot import plot_vehicle_routes
 plot_vehicle_routes(loc, vehicle_routes, uav_start_idxs, filename)
-from utils import calc_avg_node_visit_time_multi_car
-avg_visit_time = calc_avg_node_visit_time_multi_car(loc, vehicle_routes)
-print(f"Average node visit time: {avg_visit_time}")
 

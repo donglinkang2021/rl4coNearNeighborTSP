@@ -19,10 +19,15 @@ settings = {
     }
 }
 
-n_poi = 100           # user
-n_depots = 20        # bus stop
-n_UGVs = 1
-n_UAVs = 5
+def get_setting(name:str):
+    return settings[name]['n_poi'], settings[name]['n_depots'], settings[name]['n_UGVs'], settings[name]['n_UAVs']
+
+# n_poi = 100           # user
+# n_depots = 20        # bus stop
+# n_UGVs = 1
+# n_UAVs = 5
+
+n_poi, n_depots, n_UGVs, n_UAVs = get_setting('setting1')
 
 
 n = n_poi + n_depots + 1                            # number of nodes
