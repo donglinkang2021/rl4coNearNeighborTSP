@@ -1,5 +1,6 @@
-# import debugpy; debugpy.connect(('10.1.114.56', 5678))
+import debugpy; debugpy.connect(('10.1.114.56', 5678))
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import traceback
@@ -264,9 +265,8 @@ def plot_vehicle_routes(loc, routes, env_args, filename):
 
     n_depots = env_args['n_depots']
 
-
     plt.figure(figsize=(10, 10))
-    colors = plt.cm.get_cmap('tab20', len(routes))    
+    colors = matplotlib.colormaps['tab20']
 
     for idx, (vehicle, route) in enumerate(routes.items()):
         route_locs = np.array([loc[node] for node in route])
