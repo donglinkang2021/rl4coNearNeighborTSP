@@ -16,6 +16,18 @@ settings = {
         "n_depots": 20,
         "n_UGVs": 1,
         "n_UAVs": 5,
+    },
+    "setting4": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+    "setting5": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
     }
 }
 

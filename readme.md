@@ -32,3 +32,22 @@ settings = {
 | Nearest_Neighbor | ![](./images/2EVRP-Nearest_Neighbor-200user-40busstop-1UGVs-10UAVs.png) | ![](./images/2EVRP-Nearest_Neighbor-200user-20busstop-2UGVs-5UAVs.png) | ![](./images/2EVRP-Nearest_Neighbor-100user-20busstop-1UGVs-5UAVs.png) |
 | Simulated_Annealing | ![](./images/2EVRP-Simulated_Annealing-200user-40busstop-1UGVs-10UAVs.png) | ![](./images/2EVRP-Simulated_Annealing-200user-20busstop-2UGVs-5UAVs.png) | ![](./images/2EVRP-Simulated_Annealing-100user-20busstop-1UGVs-5UAVs.png) |
 | Genetic_Algorithm | ![](./images/2EVRP-Genetic_Algorithm-200user-40busstop-1UGVs-10UAVs.png) | ![](./images/2EVRP-Genetic_Algorithm-200user-20busstop-2UGVs-5UAVs.png) | ![](./images/2EVRP-Genetic_Algorithm-100user-20busstop-1UGVs-5UAVs.png) |
+
+# 改成下面格式
+
+```json
+settings = {
+    "setting4": {
+        "n_poi": 200,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+    "setting5": {
+        "n_poi": 100,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
+    }
+}
+```

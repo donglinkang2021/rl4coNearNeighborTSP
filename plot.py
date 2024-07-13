@@ -7,8 +7,10 @@ from typing import List
 def plot_vehicle_routes(
         loc: np.ndarray, 
         routes: dict, 
-        uav_start_idxs: List[int], 
-        filename: str
+        # uav_start_idxs: List[int], 
+        n_depots: int,
+        filename: str,
+        env_args:dict
     ):
 
     plt.figure(figsize=(10, 10))
@@ -39,21 +41,21 @@ def plot_vehicle_routes(
     
     # this will plot all the bus stops
     # Bus stops
-    # for depot in range(1, n_depots+1):
-    #     plt.plot(
-    #         loc[depot][0], loc[depot][1], 'ks', 
-    #         markersize=10, label=f'Depot {depot}'
-    #     )
-    
-    for i, depot_idx in enumerate(uav_start_idxs):
+    for depot in range(1, n_depots+1):
         plt.plot(
-            loc[depot_idx][0], loc[depot_idx][1], 'ks', 
-            markersize=10, label=f'Depot {i}'
+            loc[depot][0], loc[depot][1], 'ks', 
+            markersize=10, label=f'Depot {depot}'
         )
+    
+    # for i, depot_idx in enumerate(uav_start_idxs):
+    #     plt.plot(
+    #         loc[depot_idx][0], loc[depot_idx][1], 'ks', 
+    #         markersize=10, label=f'Depot {i}'
+    #     )
 
     plt.legend() # hope this place to the outside of the plot
     # plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
-    avg_visit_time = calc_avg_node_visit_time_multi_car(loc, routes)
+    avg_visit_time = calc_avg_node_visit_time_multi_car(loc, routes, env_args)
     plt.title(f"Vehicle Routes\nAverage node visit time: {avg_visit_time:.2f}")
     plt.xlabel("X coordinate")
     plt.ylabel("Y coordinate")

@@ -1,7 +1,8 @@
 # import debugpy; debugpy.connect(('10.1.114.56', 5678))
 
 import numpy as np
-from config import get_env_args, get_setting, settings
+from config import get_env_args, get_setting
+from utils import calc_avg_node_visit_time_multi_car
 from method import (
     kmeans, 
     euclidean_distance, 
@@ -110,33 +111,43 @@ def main():
     data = np.random.uniform(size=(dataset_size, tsp_size, 2)).astype(np.float32)
 
     # solution
-    method_list = [TSPMethod.NEAREST_NEIGHBOR, TSPMethod.SIMULATED_ANNEALING, TSPMethod.GENETIC_ALGORITHM]
-    settings_list = ['setting1', 'setting2', 'setting3']
+    method = TSPMethod.NEAREST_NEIGHBOR
+    settings_list = ['setting1', 'setting2', 'setting3', 'setting4', 'setting5']
 
     pbar = tqdm(
-        total=len(method_list)*len(settings_list)*dataset_size,
+        total=len(settings_list)*dataset_size,
         desc='Solving',
         dynamic_ncols=True
     )
 
-    for method in method_list:
-        for setting in settings_list:
-            n_poi, n_depots, n_UGVs, n_UAVs = get_setting(setting)
-            env_args = get_env_args(n_poi, n_depots, n_UGVs, n_UAVs)
+    avg_time_dict = {}
+    for setting in settings_list:
+        n_poi, n_depots, n_UGVs, n_UAVs = get_setting(setting)
+        env_args = get_env_args(n_poi, n_depots, n_UGVs, n_UAVs)
 
-            vehicle_routes_list = []
-            for i in range(dataset_size):
-                loc = data[i]
-                vehicle_routes = solve_tsp(loc, method, env_args)
-                vehicle_routes_list.append(vehicle_routes)
-                pbar.update(1)
-            
-            filename = f'result/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.json'
-            with open(filename, 'w') as f:
-                json.dump(vehicle_routes_list, f)
+        vehicle_routes_list = []
+        avg_time_list = []
+        for i in range(dataset_size):
+            loc = data[i]
+            vehicle_routes = solve_tsp(loc, method, env_args)
+            try :
+                avg_time = calc_avg_node_visit_time_multi_car(loc, vehicle_routes, env_args)
+            except KeyError:
+                print(f'KeyError: {setting} dataset {i}')
+            vehicle_routes_list.append(vehicle_routes)
+            avg_time_list.append(avg_time)
+            pbar.update(1)
+        
+        filename = f'result/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.json'
+        with open(filename, 'w') as f:
+            json.dump(vehicle_routes_list, f)
+        print(f'{filename} saved')
 
+        avg_time_dict[setting] = np.mean(avg_time_list)
     pbar.close()
-
+    with open('result/avg_time.json', 'w') as f:
+        json.dump(avg_time_dict, f)
+    print('avg_time.json saved')
 
 if __name__ == '__main__':
     main()
