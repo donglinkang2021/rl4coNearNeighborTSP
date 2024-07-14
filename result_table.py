@@ -33,5 +33,3 @@ def result2table(result_dir:str):
         f.write(table2)
 
     print(f'{result_dir}/result_table.md saved')
-
-result2table('result/20240714-102404')
