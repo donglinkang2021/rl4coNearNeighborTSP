@@ -2,7 +2,11 @@
 
 import numpy as np
 from config import get_env_args, get_setting, settings
-from utils import calc_avg_node_visit_time_multi_car
+from pathlib import Path
+from utils import (
+    calc_avg_node_visit_time_multi_car,
+    get_time_str
+)
 from method import (
     kmeans, 
     euclidean_distance, 
@@ -11,6 +15,7 @@ from method import (
 )
 import json
 from tqdm import tqdm
+
 
 def solve_tsp(
         loc:np.ndarray, 
@@ -103,6 +108,11 @@ def solve_tsp(
 
 
 def main():
+    # create result folder
+    Path('result').mkdir(exist_ok=True)
+    current_time = get_time_str()
+    Path(f'result/{current_time}').mkdir(exist_ok=True)
+    result_dir = f'result/{current_time}'
 
     # generate random data
     np.random.seed(1234)
@@ -138,16 +148,22 @@ def main():
             avg_time_list.append(avg_time)
             pbar.update(1)
         
-        filename = f'result/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.json'
+        filename = f'{result_dir}/2EVRP-{method.phrase}-{n_poi}user-{n_depots}busstop-{n_UGVs}UGVs-{n_UAVs}UAVs.json'
         with open(filename, 'w') as f:
             json.dump(vehicle_routes_list, f)
         print(f'{filename} saved')
 
         avg_time_dict[setting] = np.mean(avg_time_list)
     pbar.close()
-    with open('result/avg_time.json', 'w') as f:
+    with open(f'{result_dir}/avg_time.json', 'w') as f:
         json.dump(avg_time_dict, f)
+    with open(f'{result_dir}/config.json', 'w') as f:
+        json.dump(settings, f)
     print('avg_time.json saved')
+    print('config.json saved')
+
+    from result_table import result2table
+    result2table(result_dir)
 
 if __name__ == '__main__':
     main()

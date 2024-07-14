@@ -1,121 +1,109 @@
 settings = {
+    
+    # n_poi = 100, n_depots = 20, change n_UGVs and n_UAVs
     "setting1": {
-        "n_poi": 200,
-        "n_depots": 40,
+        "n_poi": 100,
+        "n_depots": 20,
         "n_UGVs": 1,
-        "n_UAVs": 10,
+        "n_UAVs": 5,
     },
     "setting2": {
-        "n_poi": 200,
+        "n_poi": 100,
         "n_depots": 20,
-        "n_UGVs": 2,
-        "n_UAVs": 5,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
     },
     "setting3": {
         "n_poi": 100,
         "n_depots": 20,
-        "n_UGVs": 1,
-        "n_UAVs": 5,
+        "n_UGVs": 2,
+        "n_UAVs": 10,
     },
     "setting4": {
-        "n_poi": 200,
+        "n_poi": 100,
         "n_depots": 20,
         "n_UGVs": 2,
         "n_UAVs": 20,
     },
+
+    # n_poi = 100, n_UGVs = 1, n_UAVs = 10, change n_depots
     "setting5": {
         "n_poi": 100,
-        "n_depots": 20,
+        "n_depots": 10,
         "n_UGVs": 1,
         "n_UAVs": 10,
     },
     "setting6": {
-        "n_poi": 200,
+        "n_poi": 100,
         "n_depots": 20,
         "n_UGVs": 1,
-        "n_UAVs": 3,
+        "n_UAVs": 10,
     },
     "setting7": {
+        "n_poi": 100,
+        "n_depots": 30,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
+    },
+    "setting8": {
+        "n_poi": 100,
+        "n_depots": 40,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
+    },
+
+    # n_poi = 200, n_depots = 20, change n_UGVs and n_UAVs
+    "setting9": {
         "n_poi": 200,
         "n_depots": 20,
         "n_UGVs": 1,
         "n_UAVs": 5,
-    },
-    "setting8": {
-        "n_poi": 200,
-        "n_depots": 20,
-        "n_UGVs": 2,
-        "n_UAVs": 5,
-    },
-
-    "setting9": {
-        "n_poi": 200,
-        "n_depots": 10,
-        "n_UGVs": 2,
-        "n_UAVs": 20,
     },
     "setting10": {
         "n_poi": 200,
-        "n_depots": 30,
-        "n_UGVs": 2,
-        "n_UAVs": 20,
+        "n_depots": 20,
+        "n_UGVs": 1,
+        "n_UAVs": 10,
     },
     "setting11": {
         "n_poi": 200,
-        "n_depots": 40,
+        "n_depots": 20,
+        "n_UGVs": 2,
+        "n_UAVs": 10,
+    },
+    "setting12": {
+        "n_poi": 200,
+        "n_depots": 20,
         "n_UGVs": 2,
         "n_UAVs": 20,
     },
 
-    "setting12": {
-        "n_poi": 100,
-        "n_depots": 20,
-        "n_UGVs": 1,
-        "n_UAVs": 3,
-    },
+    # n_poi = 200, n_UGVs = 2, n_UAVs = 20, change n_depots
     "setting13": {
-        "n_poi": 100,
-        "n_depots": 20,
-        "n_UGVs": 1,
-        "n_UAVs": 5,
+        "n_poi": 200,
+        "n_depots": 10,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
     },
     "setting14": {
-        "n_poi": 100,
-        "n_depots": 20,
-        "n_UGVs": 2,
-        "n_UAVs": 5,
-    },
-    "setting15": {
-        "n_poi": 100,
-        "n_depots": 20,
-        "n_UGVs": 2,
-        "n_UAVs": 10,
-    },
-
-    "setting16": {
-        "n_poi": 100,
-        "n_depots": 10,
-        "n_UGVs": 1,
-        "n_UAVs": 5,
-    },
-    "setting17": {
-        "n_poi": 100,
-        "n_depots": 30,
-        "n_UGVs": 1,
-        "n_UAVs": 5,
-    },
-    "setting18": {
-        "n_poi": 100,
-        "n_depots": 40,
-        "n_UGVs": 1,
-        "n_UAVs": 5,
-    },
-    "setting19": {
         "n_poi": 200,
         "n_depots": 20,
         "n_UGVs": 2,
-        "n_UAVs": 10,
+        "n_UAVs": 20,
     },
+    "setting15": {
+        "n_poi": 200,
+        "n_depots": 30,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+    "setting16": {
+        "n_poi": 200,
+        "n_depots": 40,
+        "n_UGVs": 2,
+        "n_UAVs": 20,
+    },
+    
 }
 
 def get_setting(name:str):

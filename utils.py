@@ -1,12 +1,15 @@
-from config import *
 import numpy as np
 from method import calculate_distance_matrix
+import time
+
+def get_time_str():
+    return time.strftime("%Y%m%d-%H%M%S", time.localtime())
 
 def calc_avg_node_visit_time_multi_car(
         loc: np.ndarray, 
         routes: dict,
         env_args:dict
-    ):
+    ) -> float:
 
     # config
     n_poi = env_args['n_poi']
