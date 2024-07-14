@@ -2,6 +2,10 @@ import numpy as np
 from method import calculate_distance_matrix
 import time
 
+def softmax(x):
+    e_x = np.exp(x - np.max(x))  # 减去 np.max(x) 是为了数值稳定性
+    return e_x / e_x.sum(axis=0)
+
 def get_time_str():
     return time.strftime("%Y%m%d-%H%M%S", time.localtime())
 

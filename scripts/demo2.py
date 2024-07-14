@@ -5,8 +5,7 @@ from config import get_env_args, get_setting, settings
 from pathlib import Path
 from utils import (
     calc_avg_node_visit_time_multi_car,
-    get_time_str,
-    softmax
+    get_time_str
 )
 from method import (
     kmeans, 
@@ -94,23 +93,8 @@ def solve_tsp(
         locs_idxs = [start_idxs] + depot_idxs
         locs_idxs = np.array(locs_idxs)
         locs = loc[locs_idxs]
-
-        # here ugv should consider each uav_start_loc payload
-        # I think this will be better
-        depot_payloads = [0]
-        for depot_idx in depot_idxs:
-            depot_payload = 0
-            for uav_idx in range(n_UAVs):
-                if uav_start_idxs[uav_idx] == depot_idx:
-                    depot_payload += len(uav_poi[uav_names[uav_idx]]['poi_idxs'])
-            depot_payloads.append(depot_payload)
-        depot_payloads = np.array(depot_payloads)
-
-        # method4: normalize and multiply to dist_matrix
-        depot_payloads = 1 - depot_payloads / np.sum(depot_payloads)
-        dist_matrix = euclidean_distance(locs, locs)
-        dist_matrix = dist_matrix * depot_payloads
         
+        dist_matrix = euclidean_distance(locs, locs)
         route = solve(dist_matrix, method)
         ugv_depot[ugv_names[i]]['route'] = locs_idxs[route].tolist()
 

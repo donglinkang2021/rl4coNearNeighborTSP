@@ -106,6 +106,21 @@ def solve_tsp(
             depot_payloads.append(depot_payload)
         depot_payloads = np.array(depot_payloads)
 
+        # method1: softmax and concat to locs
+        # depot_payloads = 1 - softmax(depot_payloads)
+        # locs = np.concatenate([locs, depot_payloads[:, None]], axis=1)
+        # dist_matrix = euclidean_distance(locs, locs)
+        
+        # method2: normalize and concat to locs
+        # depot_payloads = 1 - depot_payloads / np.sum(depot_payloads)
+        # locs = np.concatenate([locs, depot_payloads[:, None]], axis=1)
+        # dist_matrix = euclidean_distance(locs, locs)
+
+        # method3: softmax and multiply to dist_matrix
+        # depot_payloads = 1 - softmax(depot_payloads)
+        # dist_matrix = euclidean_distance(locs, locs)
+        # dist_matrix = dist_matrix * depot_payloads
+
         # method4: normalize and multiply to dist_matrix
         depot_payloads = 1 - depot_payloads / np.sum(depot_payloads)
         dist_matrix = euclidean_distance(locs, locs)
